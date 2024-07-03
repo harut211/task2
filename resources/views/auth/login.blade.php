@@ -7,7 +7,7 @@
     </head>
     <body>
 
-    <form action="{{route('signin')}}" method="post">
+    <form action="{{route('signin')}}" method="get">
         @csrf <!-- {{ csrf_field() }} -->
         <input type="text" name="login"><br>
         <input type="password" name="password">
