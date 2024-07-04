@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use Ably\Auth;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class adminAuth
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class adminAuth
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()){
-            redirect()->route('login');
+            return redirect()->route('login.redirect');
         }
         return $next($request);
     }

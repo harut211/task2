@@ -18,10 +18,7 @@ class PostController extends Controller
         $this->postService = $postService;
     }
 
-    public function index(){
-        $posts = Post::where('approve',true)->get();
-        return view('dashboard.notice-board',compact('posts'));
-    }
+
 
     public function create(PostRequest $request){
 

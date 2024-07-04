@@ -18,11 +18,11 @@
 
 @endforeach
 <script>
-    $(document).ready(function () {
-        setTimeout(function () {
-            location.reload(true);
-        }, 1000);
-    });
+    // $(document).ready(function () {
+    //     setTimeout(function () {
+    //         location.reload(true);
+    //     }, 1000);
+    // });
 </script>
 </body>
 </html>

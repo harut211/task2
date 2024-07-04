@@ -22,4 +22,8 @@ class LoginController extends Controller
             return redirect()->intended('login');
         }
     }
+
+    public function redirect(){
+        dd(21312);
+    }
 }
