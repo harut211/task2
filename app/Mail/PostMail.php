@@ -28,12 +28,13 @@ class PostMail extends Mailable
      * Get the message envelope.
      */
     public function build(){
-        $url = str()->random(5);
+        $url = url('/approved/'.$this->request->id);
         return $this->view('emails.mail')
             ->subject($this->request->title)
             ->with([
                 'title' => $this->request->title,
                 'content' => $this->request->content,
+                'url' => $url,
         ]);
     }
 }

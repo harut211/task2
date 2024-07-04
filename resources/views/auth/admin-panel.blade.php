@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,9 +6,10 @@
 {{--    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>--}}
 </head>
 <body>
-
-    <form action="{{route('logout')}}" method="post">
+<div>{{session('success')}}</div>
+    <form action="{{route('post-create')}}" method="post">
         @csrf
+        @method("POST")
         <input type="text" id="title" name="title"><br>
         <textarea id="content" name="content"></textarea><br>
 {{--     <meta name="csrf-token" content="{{ csrf_token() }}">--}}

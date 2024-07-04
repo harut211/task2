@@ -2,24 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
+use App\Http\Services\PostService;
 use App\Mail\PostMail;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
 
-    public function create(Request $request){
+    protected $postService;
 
-     $r =  Mail::to('harutyuna6@gmail.com')->send(new PostMail($request));
-     if ($r){
-         echo "success";
-     }
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
     }
 
+    public function index(){
+        $posts = Post::where('approve',true)->get();
+        return view('dashboard.notice-board',compact('posts'));
+    }
 
-    public function approved(Request $request){
+    public function create(PostRequest $request){
+
+      $post =  $this->postService->create($request);
+      Mail::to('harutyuna6@gmail.com')->queue(new PostMail($post));
+      return back()->with('success', 'Post Created Successfully');
 
     }
+
+    public function approved($id){
+        $this->postService->update($id);
+        return view('auth.admin-panel');
+    }
+
 }
