@@ -7,8 +7,10 @@
 </head>
 <body>
    <form action="{{route('auth-login')}}" method="get">
-       @csrf
-          <meta name="csrf-token" content="{{ csrf_token() }}">
+        {{-- @method('POST')
+        @csrf --}}
+        {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
+          {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
         <input type="text" name="login" id="login"><br>
         <input type="password" name="password" id="password">
         <button class="btn btn-primary">Log in</button>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostSendEvent;
 use App\Http\Requests\PostRequest;
 use App\Http\Services\PostService;
 use App\Mail\PostMail;
 use App\Models\Post;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -23,14 +25,18 @@ class PostController extends Controller
     public function create(PostRequest $request){
 
       $post =  $this->postService->create($request);
-      Mail::to('harutyuna6@gmail.com')->queue(new PostMail($post));
+      Mail::to('harutarakelyan14@gmail.com')->queue(new PostMail($post));
       return back()->with('success', 'Post Created Successfully');
 
     }
 
     public function approved($id){
         $this->postService->update($id);
+        $post = Post::where('id',$id)->get();
+        event(new PostSendEvent($post));
         return view('auth.admin-panel');
     }
+
+    
 
 }

@@ -7,12 +7,11 @@
 </head>
 <body>
 <div>{{session('success')}}</div>
-    <form action="{{route('post-create')}}" method="post">
-        @csrf
-        @method("POST")
+    <form action="{{route('create-post')}}" method="post">
+        {{-- @csrf
+        @method("POST") --}}
         <input type="text" id="title" name="title"><br>
         <textarea id="content" name="content"></textarea><br>
-{{--     <meta name="csrf-token" content="{{ csrf_token() }}">--}}
         <button class="btn">Publish</button>
     </form>
 {{--    <script>--}}
