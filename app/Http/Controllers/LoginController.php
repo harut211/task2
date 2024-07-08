@@ -23,7 +23,4 @@ class LoginController extends Controller
         }
     }
 
-    public function redirect(){
-        dd(21312);
-    }
 }

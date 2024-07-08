@@ -16,8 +16,8 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()){
-            return redirect()->route('login.redirect');
+        if (auth()->check()){
+            abort(404);
         }
         return $next($request);
     }

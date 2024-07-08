@@ -18,8 +18,6 @@ class PostController extends Controller
         $this->postService = $postService;
     }
 
-
-
     public function create(PostRequest $request){
 
       $post =  $this->postService->create($request);
