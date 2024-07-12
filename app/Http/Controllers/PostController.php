@@ -23,7 +23,7 @@ class PostController extends Controller
     public function create(PostRequest $request){
 
       $post =  $this->postService->create($request);
-      Mail::to('harutyuna6@gmail.com')->send(new PostMail($post));
+      Mail::to('harutarakelyan14@gmail.com')->send(new PostMail($post));
       return back()->with('success', 'Post Created Successfully');
 
     }
@@ -32,7 +32,7 @@ class PostController extends Controller
         $this->postService->update($id);
         $post = Post::where('id',$id)->get();
         event(new PostSendEvent($post));
-        return view('auth.admin-panel');
+        return redirect()->route('admin-panel');
     }
 
 

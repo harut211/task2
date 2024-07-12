@@ -12,17 +12,19 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+
+    public function adminPanel()
+    {
+        return view('auth/admin-panel');
+    }
     public function authenticate(LoginRequest $request)
     {
         $credentials = $request->only('login', 'password');
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            // $url = route('create_post_view');
-            // dd($url);
-            // return redirect()->route('create_post_view');
             return view('auth/admin-panel');
         }else{
-            return redirect()->intended('login');
+            return redirect()->route('login-basic');
         }
     }
 

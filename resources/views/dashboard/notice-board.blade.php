@@ -25,7 +25,6 @@
 <script type="module">
     $(function(){
 
-
     window.Echo.channel('post').listen('PostSendEvent',(e) =>{
         let data = e.data;
         let post = data[0];
