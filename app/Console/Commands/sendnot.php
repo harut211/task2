@@ -28,7 +28,7 @@ class sendnot extends Command
     public function handle()
     {
         $user = Post::where('id',51)->get()->toArray();
-        (event(new PostSendEvent($user)));
+        event(new PostSendEvent($user));
 
     }
 }
