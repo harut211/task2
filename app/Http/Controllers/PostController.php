@@ -22,19 +22,18 @@ class PostController extends Controller
 
     public function create(PostRequest $request)
     {
-      $post =  $this->postService->create($request);
-      Mail::to('harutarakelyan14@gmail.com')->send(new PostMail($post));
-      return back()->with('success', 'Post Created Successfully');
+        $post = $this->postService->create($request);
+        Mail::to('harutarakelyan14@gmail.com')->send(new PostMail($post));
+        return back()->with('success', 'Post Created Successfully');
     }
 
     public function approved($id)
     {
         $this->postService->update($id);
-        $post = Post::where('id',$id)->get();
+        $post = Post::where('id', $id)->get();
         event(new PostSendEvent($post));
         return redirect()->route('admin-panel');
     }
-
 
 
 }

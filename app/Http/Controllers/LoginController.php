@@ -17,6 +17,7 @@ class LoginController extends Controller
     {
         return view('auth/admin-panel');
     }
+
     public function authenticate(LoginRequest $request)
     {
         $credentials = $request->only('login', 'password');
@@ -24,7 +25,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return view('auth/admin-panel');
-        } else{
+        } else {
             return redirect()->route('login-basic');
         }
 

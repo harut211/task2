@@ -26,11 +26,12 @@ class LoginRequest extends FormRequest
             'password' => 'required|min:4',
         ];
     }
+
     public function messages(): array
     {
         return [
-            'login.required'=>'please enter login',
-            'password.required'=>'please enter password'
+            'login.required' => 'please enter login',
+            'password.required' => 'please enter password'
         ];
     }
 }

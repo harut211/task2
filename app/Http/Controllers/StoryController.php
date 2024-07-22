@@ -9,7 +9,7 @@ class StoryController extends Controller
 {
     public function index()
     {
-        $posts = Post::where('approve',true)->get();
-        return view('dashboard.notice-board',compact('posts'));
+        $posts = Post::where('approve', true)->get();
+        return view('dashboard.notice-board', compact('posts'));
     }
 }

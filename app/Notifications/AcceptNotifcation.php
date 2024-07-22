@@ -39,9 +39,9 @@ class AcceptNotifcation extends Notification
     {
         $url = url('approved');
         return (new MailMessage)
-                    ->line($this->request->title)
-                    ->action('Notification Action', $url)
-                    ->line($this->request->content);
+            ->line($this->request->title)
+            ->action('Notification Action', $url)
+            ->line($this->request->content);
     }
 
     /**

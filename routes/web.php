@@ -15,9 +15,9 @@ Route::prefix('/login')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::prefix('/admin')->group(function () {
-        Route::get('/admin-panel',[LoginController::class, 'adminPanel'])->name('admin-panel');
+        Route::get('/admin-panel', [LoginController::class, 'adminPanel'])->name('admin-panel');
         Route::post('/post', [PostController::class, 'create'])->name('post-create');
-        Route::get('/logout', [LoginController::class, 'logout'] )->name('logout');
+        Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     });
     Route::get('/approved/{id}', [PostController::class, 'approved'])->name('app-email');
 });
