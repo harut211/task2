@@ -7,7 +7,9 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-
+<button class="btn btn-primary">
+    <a href="{{route('login')}}" style="color: white ">Log In</a>
+    </button>
 <div class="card" id="post">
         @foreach($posts as $post)
             <div class="alert alert-success" style="margin: 10px;" >
