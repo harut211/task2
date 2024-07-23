@@ -10,7 +10,7 @@ Route::get('/', [StoryController::class, 'index']);
 
 Route::prefix('/login')->group(function () {
     Route::get('/login-basic', [LoginController::class, 'index'])->name('login');
-    Route::get('/auth-login', [LoginController::class, 'authenticate'])->name('auth-login');
+    Route::post('/auth-login', [LoginController::class, 'authenticate'])->name('auth-login');
 });
 
 Route::middleware('auth')->group(function () {

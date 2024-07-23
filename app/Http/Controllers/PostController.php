@@ -30,7 +30,7 @@ class PostController extends Controller
     public function approved($id)
     {
         $this->postService->update($id);
-        $post = Post::where('id', $id)->get();
+        $post = Post::find($id);
         event(new PostSendEvent($post));
         return redirect()->route('admin-panel');
     }
