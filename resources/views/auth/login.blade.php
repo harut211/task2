@@ -16,6 +16,9 @@
 
                             <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                             <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                            @if(!empty($errors->first()))
+                                <div class="mb-3" style="color: red">{{$errors->first()}}</div>
+                            @endif
 
                             <form action="{{route('auth-login')}}" method="post">
                                 <div data-mdb-input-init class="form-outline form-white mb-4">

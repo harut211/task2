@@ -22,7 +22,7 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string',
+            'title' => 'required|string|max:255',
             'content' => 'required|string',
         ];
     }
@@ -31,6 +31,9 @@ class PostRequest extends FormRequest
     {
         return [
             'title.required' => 'Title is required',
+            'title.max' => 'Maximum 255 characters allowed',
+            'title.string' => 'Title must be a string',
+            'content.string' => 'Content must be a string',
             'content.required' => 'Content is required',
         ];
     }

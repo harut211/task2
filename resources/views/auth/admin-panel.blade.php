@@ -19,10 +19,16 @@
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Title</label>
                     <input type="text" id="title" name="title" class="form-control" >
+                    @if(!empty($errors->first('title')))
+                        <div style="color: red">{{$errors->first('title')}} </div>
+                    @endif
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Content</label>
                     <textarea  id="content" name="content" class="form-control"  rows="3"></textarea>
+                    @if(!empty($errors->first('content')))
+                        <div style="color: red">{{$errors->first('content')}} </div>
+                    @endif
                 </div>
                 <button class="btn btn-success">Publish</button>
             </form>

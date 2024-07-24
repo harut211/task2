@@ -30,8 +30,11 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'login.required' => 'please enter login',
-            'password.required' => 'please enter password'
+            'login.required' => 'Please enter login',
+            'login.string' => 'Login must be string',
+            'login.max' => 'Login must be 255 characters',
+            'password.min' => 'Password must be at least 4 characters',
+            'password.required' => 'Please enter password'
         ];
     }
 }
