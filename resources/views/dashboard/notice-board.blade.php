@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,37 +8,37 @@
 <body>
 <button class="btn btn-primary">
     <a href="{{route('login')}}" style="color: white ">Log In</a>
-    </button>
+</button>
 <div class="card" id="post">
-        @foreach($posts as $post)
-            <div class="alert alert-success" style="margin: 10px;" >
-                <div>Title--
-                    {{$post->title}}
-                </div>
-                <span>Content--
+    @foreach($posts as $post)
+        <div class="alert alert-success" style="margin: 10px;">
+            <div>Title--
+                {{$post->title}}
+            </div>
+            <span>Content--
                 {{$post->content}}
                 </span>
-            </div>
-        @endforeach
+        </div>
+    @endforeach
 </div>
 
 <script type="module">
-    $(function(){
+    $(function () {
 
-    window.Echo.channel('post').listen('PostSendEvent',(e) =>{
-        let data = e.data;
-        let title = data.title;
-        let content = data.content;
-        const element = document.getElementById('post');
-        let div =  `
+        window.Echo.channel('post').listen('PostSendEvent', (e) => {
+            let data = e.data;
+            let title = data.title;
+            let content = data.content;
+            const element = document.getElementById('post');
+            let div = `
          <div class="alert alert-success" style="margin: 10px; " >
             <div>Title--${title}</div>
             <span>Content${content}</span>
         </div>
             `
-        element.insertAdjacentHTML('afterbegin',div);
-        console.log(post);
-    })
+            element.insertAdjacentHTML('afterbegin', div);
+            console.log(post);
+        })
     })
 
 </script>
