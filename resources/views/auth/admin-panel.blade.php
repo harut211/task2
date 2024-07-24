@@ -17,11 +17,11 @@
                 @csrf
                 @method("POST")
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="text" id="title" name="title" class="form-control"  placeholder="name@example.com">
+                    <label for="exampleFormControlInput1" class="form-label">Title</label>
+                    <input type="text" id="title" name="title" class="form-control" >
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                    <label for="exampleFormControlTextarea1" class="form-label">Content</label>
                     <textarea  id="content" name="content" class="form-control"  rows="3"></textarea>
                 </div>
                 <button class="btn btn-success">Publish</button>
