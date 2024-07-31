@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Events\PostSendEvent;
+use App\Http\Requests\ApproveRequest;
 use App\Http\Requests\PostRequest;
 use App\Http\Services\PostService;
 use App\Mail\PostMail;
 use App\Models\Post;
+use Dotenv\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -31,13 +33,22 @@ class PostController extends Controller
 
     public function approved(Request $request)
     {
-        $token = Str::after($request->path(),'approved/');
-        $post =  $this->postService->update($token);
-        if ($post !== false) {
-            event(new PostSendEvent($post));
-            return redirect()->route('admin-panel');
-        } else {
-            return  redirect()->route('admin-panel')->with('error', 'You have already approved the post');
+        $token = $request->route('token');
+        $validator = \Illuminate\Support\Facades\Validator::make(
+            ['token' => $token],
+            ['token' => 'required|exists:posts,token']
+        );
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else{
+            $token = Str::after($request->path(),'approved/');
+            $post =  $this->postService->update($token);
+            if ($post !== false) {
+                event(new PostSendEvent($post));
+                return redirect()->route('admin-panel');
+            } else {
+                return  redirect()->route('admin-panel')->with('error', 'You have already approved the post');
+            }
         }
 
     }

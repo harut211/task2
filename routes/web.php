@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/post', [PostController::class, 'create'])->name('post-create');
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     });
-    Route::get('/approved/{id}', [PostController::class, 'approved'])->name('app-email');
+    Route::get('/approved/{token}', [PostController::class, 'approved'])->name('app-email');
 });
 
 

@@ -13,6 +13,9 @@
     @if(!empty(session('error')))
         <div class="alert alert-danger">{{session('error')}}</div>
     @endif
+    @if(!empty($errors->first()))
+        <div class="alert alert-danger">{{$errors->first()}}</div>
+    @endif
     <div class="card-body">
         <div class="container ">
             <form action="{{route('post-create')}}" method="post">
