@@ -27,7 +27,7 @@ class PostController extends Controller
     {
         $post = $this->postService->create($request);
         $token = sha1($post->id);
-        Mail::to('harutarakelyan14@gmail.com')->send(new PostMail($token,$post));
+        Mail::to('harutarakelyan14@gmail.com')->send(new PostMail($token, $post));
         return back()->with('success', 'Post Created Successfully');
     }
 
@@ -40,16 +40,14 @@ class PostController extends Controller
         );
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
-        } else{
-            $post =  $this->postService->update($token);
+        } else {
+            $post = $this->postService->update($token);
             if ($post !== false) {
                 event(new PostSendEvent($post));
                 return redirect()->route('admin-panel');
             } else {
-                return  redirect()->route('admin-panel')->with('error', 'You have already approved the post');
+                return redirect()->route('admin-panel')->with('error', 'You have already approved the post');
             }
         }
     }
-
-
 }
