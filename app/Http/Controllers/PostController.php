@@ -9,6 +9,7 @@ use App\Mail\PostMail;
 use App\Models\Post;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -23,16 +24,22 @@ class PostController extends Controller
     public function create(PostRequest $request)
     {
         $post = $this->postService->create($request);
-        Mail::to('harutarakelyan14@gmail.com')->send(new PostMail($post));
+        $token = sha1($post->id);
+        Mail::to('harutarakelyan14@gmail.com')->send(new PostMail($token,$post));
         return back()->with('success', 'Post Created Successfully');
     }
 
-    public function approved($id)
+    public function approved(Request $request)
     {
-        $this->postService->update($id);
-        $post = Post::find($id);
-        event(new PostSendEvent($post));
-        return redirect()->route('admin-panel');
+        $token = Str::after($request->path(),'approved/');
+        $post =  $this->postService->update($token);
+        if ($post !== false) {
+            event(new PostSendEvent($post));
+            return redirect()->route('admin-panel');
+        } else {
+            return  redirect()->route('admin-panel')->with('error', 'You have already approved the post');
+        }
+
     }
 
 

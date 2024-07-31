@@ -7,20 +7,33 @@ use App\Models\Post;
 class PostService{
     public function create($request)
     {
+
         $post = Post::updateOrCreate([
             'title'=>$request->title,
             'content'=>$request->content,
+        ]);
+        $token = sha1($post->id);
+        $post->update([
+            'token'=>$token,
         ]);
         return $post;
     }
 
 
-    public function update($id)
+    public function update($token)
     {
-        $post= Post::find($id);
-        $post->approve = 1;
-        $post->save();
-        return $post;
+        $post = Post::where('token',$token)->first();
+        if ($post->approve !== 1) {
+            $post->update([
+                'approved'=>1,
+            ]);
+            $post->approve = 1;
+            $post->save();
+            return $post;
+        } else{
+            return false;
+        }
+
     }
 
 

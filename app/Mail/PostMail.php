@@ -13,11 +13,13 @@ class PostMail extends Mailable
     /**
      * Create a new message instance.
      */
-    protected $request;
+    protected $token;
+    protected $post;
 
-    public function __construct($request)
+    public function __construct($token, $post)
     {
-        $this->request = $request;
+        $this->token = $token;
+        $this->post = $post;
     }
 
     /**
@@ -25,12 +27,12 @@ class PostMail extends Mailable
      */
     public function build()
     {
-        $url = url('/approved/' . $this->request->id);
+        $url = url('/approved/' . $this->token);
         return $this->view('emails.mail')
-            ->subject($this->request->title)
+            ->subject($this->post->title)
             ->with([
-                'title' => $this->request->title,
-                'content' => $this->request->content,
+                'title' => $this->post->title,
+                'content' => $this->post->content,
                 'url' => $url,
             ]);
     }

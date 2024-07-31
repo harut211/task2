@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('content');
+            $table->string('token')->nullable();
             $table->boolean('approve')->default(false);
             $table->timestamps();
         });
