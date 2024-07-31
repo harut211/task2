@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Events\PostSendEvent;
-use App\Http\Requests\ApproveRequest;
 use App\Http\Requests\PostRequest;
 use App\Http\Services\PostService;
 use App\Mail\PostMail;
-use App\Models\Post;
-use Dotenv\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
