@@ -41,7 +41,6 @@ class PostController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         } else{
-            $token = Str::after($request->path(),'approved/');
             $post =  $this->postService->update($token);
             if ($post !== false) {
                 event(new PostSendEvent($post));
@@ -50,7 +49,6 @@ class PostController extends Controller
                 return  redirect()->route('admin-panel')->with('error', 'You have already approved the post');
             }
         }
-
     }
 
 
