@@ -3,18 +3,20 @@
 namespace App\Http\Services;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Cache;
 
-class PostService{
+class PostService
+{
     public function create($request)
     {
 
         $post = Post::updateOrCreate([
-            'title'=>$request->title,
-            'content'=>$request->content,
+            'title' => $request->title,
+            'content' => $request->content,
         ]);
         $token = sha1($post->id);
         $post->update([
-            'token'=>$token,
+            'token' => $token,
         ]);
         return $post;
     }
@@ -22,18 +24,14 @@ class PostService{
 
     public function update($token)
     {
-        $post = Post::where('token',$token)->first();
+        $post = Post::where('token', $token)->first();
         if ($post->approve !== 1) {
-            $post->update([
-                'approved'=>1,
-            ]);
             $post->approve = 1;
             $post->save();
             return $post;
-        } else{
+        } else {
             return false;
         }
-
     }
 
 

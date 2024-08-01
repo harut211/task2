@@ -6,6 +6,7 @@ use App\Events\PostSendEvent;
 use App\Http\Requests\PostRequest;
 use App\Http\Services\PostService;
 use App\Mail\PostMail;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
@@ -22,8 +23,7 @@ class PostController extends Controller
     public function create(PostRequest $request)
     {
         $post = $this->postService->create($request);
-        $token = sha1($post->id);
-        Mail::to('harutarakelyan14@gmail.com')->send(new PostMail($token, $post));
+        Mail::to('harutarakelyan14@gmail.com')->send(new PostMail($post));
         return back()->with('success', 'Post Created Successfully');
     }
 
