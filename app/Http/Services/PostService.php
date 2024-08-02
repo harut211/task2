@@ -3,7 +3,6 @@
 namespace App\Http\Services;
 
 use App\Models\Post;
-use Illuminate\Queue\TimeoutExceededException;
 use Illuminate\Support\Facades\Cache;
 
 class PostService
@@ -16,7 +15,7 @@ class PostService
             'content' => $request->content,
         ]);
         $token = sha1($post->id);
-        Cache::put('STORY_TOKEN_'.$token, $token, 3600);
+        Cache::put('STORY_TOKEN_'.$token, $token, 60);
         $post->update([
             'token' => $token,
         ]);
@@ -36,7 +35,7 @@ class PostService
                     return false;
                 }
             } else {
-                throw new TimeoutExceededException('Your approval token  has expired');
+                throw new \RuntimeException('Your approval token  has expired');
             }
     }
 
