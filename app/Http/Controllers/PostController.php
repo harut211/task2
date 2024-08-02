@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use App\Http\Services\PostService;
 use App\Mail\PostMail;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 

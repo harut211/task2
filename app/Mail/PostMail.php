@@ -13,12 +13,10 @@ class PostMail extends Mailable
     /**
      * Create a new message instance.
      */
-//    protected $token;
     protected $post;
 
     public function __construct( $post)
     {
-//        $this->token = $token;
         $this->post = $post;
     }
 
